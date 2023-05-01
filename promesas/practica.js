@@ -25,7 +25,7 @@ const miPedidoDePizaa = new Promise ((resolve,reject) =>{
     miPedidoDePizaa.then(manejarPedido,rechazarPedido);
 
     /*Otra forma de  manejar las promesas */
-
+    /*Encadenamiento de metodos Method Changing */
     miPedidoDePizaa
         .then((mensajeDeConfirmacion) =>{
             console.log(mensajeDeConfirmacion);
@@ -33,3 +33,11 @@ const miPedidoDePizaa = new Promise ((resolve,reject) =>{
         .then(null, (mensajeDeError) =>{
             console.log(mensajeDeError);
         });
+
+    /*Otra forma de manejar el reject */
+
+    /*
+        .catch((mensajeDeError) =>{
+            console.log(mensajeDeError);
+        });
+    */
