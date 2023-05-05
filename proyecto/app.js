@@ -9,6 +9,18 @@ const {infoCursos} = require('./cursos.js');
 app.get('/',(req,res) =>{
     res.send('Mi primer servidor. Cursos :D')
 });
+
+app.get('/api/cursos',(req,res) =>{
+    res.send(infoCursos);
+});
+
+app.get('/api/cursos/programacion',(req,res) =>{
+    res.send(infoCursos.programacion);
+});
+
+app.get('/api/cursos/matematicas',(req,res)=>{
+    res.send(infoCursos.matematicas);
+});
 // process.env.PORT se usa regularmente cuando la asignacion es en produccion
 const PUERTO =process.env.PORT || 3000;
 
