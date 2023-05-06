@@ -4,6 +4,28 @@ const app = express();
 /* ./ nos indica que no es un modulo principal como por ejemplo express */
 const {infoCursos} = require('./cursos.js');
 
+
+/* Router */
+const routerProgramacion = express.Router();
+/* Con esto tenemos un camino base */
+app.use('/api/cursos/programacion',routerProgramacion);
+
+const routerMatematicas = express.Router();
+app.use('/api/cursos/matematicas',routerMatematicas);
+
+routerProgramacion.get('/',(req,res)=>{
+    res.send(JSON.stringify(infoCursos.programacion))
+})
+
+routerMatematicas.get('/:tema',(req,res)=>{
+    const tema = req.params.tema;
+    const  resultados = infoCursos.matematicas.filter(curso => curso.tema === tema);
+    if(resultados.length === 0){
+        return res.status(404).send(`No se encontraron cursos de ${tema}`)
+    }
+    res.send(JSON.stringify(resultados));    
+});
+
 //Routing
 //Metodo  Camino y segundo argumento una funcion flecha
 app.get('/',(req,res) =>{
@@ -26,7 +48,7 @@ app.get('/api/cursos/programacion/:lenguaje',(req,res) =>{
     if(resultados.length === 0){
         return res.status(404).send(`No se encontraron cursos de ${lenguaje}`)
     }
-
+    /*http://localhost:3000/api/cursos/programacion/python?ordenar=vistas */
     if(req.query.ordenar === 'vistas'){
        return res.send(JSON.stringify(resultados.sort((a,b) => a.vistas - b.vistas)));
     }
