@@ -26,7 +26,15 @@ app.get('/api/cursos/programacion/:lenguaje',(req,res) =>{
     if(resultados.length === 0){
         return res.status(404).send(`No se encontraron cursos de ${lenguaje}`)
     }
-    res.send(JSON.stringify(resultados));
+
+    if(req.query.ordenar === 'vistas'){
+       return res.send(JSON.stringify(resultados.sort((a,b) => a.vistas - b.vistas)));
+    }
+        res.send(JSON.stringify(resultados));
+    
+    /*
+    console.log(req.query.ordenar);
+    res.send(JSON.stringify(resultados));*/
 });
 
 app.get('/api/cursos/matematicas/:tema',(req,res) =>{
@@ -37,7 +45,7 @@ app.get('/api/cursos/matematicas/:tema',(req,res) =>{
     }
     res.send(JSON.stringify(resultados));
 });
-
+/* Dos parametros URL */
 app.get('/api/cursos/programacion/:lenguaje/:nivel',(req,res)=>{
     const lenguaje = req.params.lenguaje;
     const nivel = req.params.nivel;
