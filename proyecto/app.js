@@ -2,18 +2,18 @@ const express = require('express');
 
 const app = express();
 /* ./ nos indica que no es un modulo principal como por ejemplo express */
-const {infoCursos} = require('./cursos.js');
+//const {infoCursos} = require('./cursos.js');
 
-const routerMatematicas = require('./routers/matematicas.js');
+//const routerMatematicas = require('./routers/matematicas.js');
 
 /* Router */
-//const routerProgramacion = express.Router();
+const routerProgramacion = express.Router();
 /* Con esto tenemos un camino base */
-//app.use('/api/cursos/programacion',routerProgramacion);
+app.use('/api/cursos/programacion',routerProgramacion);
 
-//const routerMatematicas = express.Router();
-//app.use('/api/cursos/matematicas',routerMatematicas);
-/*
+const routerMatematicas = express.Router();
+app.use('/api/cursos/matematicas',routerMatematicas);
+
 routerProgramacion.get('/',(req,res)=>{
     res.send(JSON.stringify(infoCursos.programacion))
 })
@@ -40,10 +40,9 @@ app.get('/api/cursos',(req,res) =>{
 app.get('/api/cursos/programacion',(req,res) =>{
     res.send(infoCursos.programacion);
 });
-*/
 /* Dos parametros URL */
 
-/*
+
 app.get('/api/cursos/programacion/:lenguaje/:nivel',(req,res)=>{
     const lenguaje = req.params.lenguaje;
     const nivel = req.params.nivel;
@@ -58,12 +57,12 @@ app.get('/api/cursos/programacion/:lenguaje/:nivel',(req,res)=>{
 
 });
 
-*/
+
 /*Parametros URL para poder manejar rutas de mejor forma 
 en vez de escribir app.get(/api/cursos/programacion/python o javascript) 
 usamos /api/cursos/programacion/:lenguaje */
 
-/*
+
 app.get('/api/cursos/programacion/:lenguaje',(req,res) =>{
     const lenguaje = req.params.lenguaje;
     const resultados = infoCursos.programacion.filter(curso => curso.lenguaje === lenguaje);
@@ -79,9 +78,9 @@ app.get('/api/cursos/programacion/:lenguaje',(req,res) =>{
     
     //console.log(req.query.ordenar);
     //res.send(JSON.stringify(resultados));
-});*/
+});
 
-/*
+
 app.get('/api/cursos/matematicas/:tema',(req,res) =>{
     const tema = req.params.tema;
     const  resultados = infoCursos.matematicas.filter(curso => curso.tema === tema);
@@ -95,7 +94,7 @@ app.get('/api/cursos/matematicas/:tema',(req,res) =>{
 app.get('/api/cursos/matematicas',(req,res)=>{
     res.send(infoCursos.matematicas);
 });
-*/
+
 // process.env.PORT se usa regularmente cuando la asignacion es en produccion
 const PUERTO =process.env.PORT || 3000;
 
